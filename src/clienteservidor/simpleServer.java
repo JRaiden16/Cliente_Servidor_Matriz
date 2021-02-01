@@ -66,9 +66,6 @@ public class simpleServer 	{
 	        output.writeObject(vector);
 	        //**************************************
 		    
-		    //System.out.println("Recibido: "+ cadena);
-			//System.out.println("Tipo de dato a pedir: ");
-		    
 		    do{
 			    //String cadena = new String (dis.readUTF());
     			System.out.println("Recibido: " + cadena);

@@ -39,12 +39,6 @@ public class simpleClient{
 		    }else if(st == "Por favor envie un dato flotante") {
 			    float flotante = sc.nextFloat();
 			    dos.writeFloat(flotante);
-		    }else if(st == "Por favor envie un dato boleano") {
-			    boolean boleano = sc.nextBoolean();
-			    dos.writeBoolean(boleano);
-		    }else if(st == "Por favor envie un dato cadena"){
-			    String cadena = sc.nextLine();
-			    dos.writeChars(cadena);
 		    }else {
 			    bandera = false;
 		    }
