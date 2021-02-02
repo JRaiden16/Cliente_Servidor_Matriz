@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import java.util.Random;
 
 public class frameMatriz extends javax.swing.JFrame {
 
@@ -18,6 +19,7 @@ public class frameMatriz extends javax.swing.JFrame {
     int tamanioX = 0;
     int tamanioY = 0;
     
+    Random rand = new Random();
     
     int xlayer = 0;
     int ylayer = 0;
@@ -127,51 +129,15 @@ public class frameMatriz extends javax.swing.JFrame {
 
         int aux = 0;
         int c1, c2;
+        //float r = rand.nextFloat();
         for (c1 = 0; c1 < ngeneral; c1++) {
             for (c2 = 0; c2 < ngeneral; c2++) {
                 JButton btnuevo1 = new JButton();
                 btnuevo1.setSize(tamanioX, tamanioY);
 
                 //////////////////////////////////////////
-                if (genLista.get(aux).equals(0)) 
-                {
-                    btnuevo1.setBackground(Color.LIGHT_GRAY);
-                }
-                if (genLista.get(aux).equals(9)) 
-                {
-                    btnuevo1.setBackground(Color.red);
-                }
-                if (genLista.get(aux).equals(8)) 
-                {
-                    btnuevo1.setBackground(Color.white);
-                }
-                if (genLista.get(aux).equals(7)) 
-                {
-                    btnuevo1.setBackground(Color.blue);
-                }
-                if (genLista.get(aux).equals(6)) 
-                {
-                    btnuevo1.setBackground(Color.cyan);
-                }
-                if (genLista.get(aux).equals(5)) 
-                {
-                    btnuevo1.setBackground(Color.green);
-                }
-                if (genLista.get(aux).equals(4)) {
-                    btnuevo1.setBackground(Color.yellow);
-                }
-                if (genLista.get(aux).equals(3)) 
-                {
-                    btnuevo1.setBackground(Color.orange);
-                }
-                if (genLista.get(aux).equals(2)) 
-                {
-                    btnuevo1.setBackground(Color.white);
-                }
-                if (genLista.get(aux).equals(1)) 
-                {
-                    btnuevo1.setBackground(Color.pink);
-                }
+                btnuevo1.setBackground(new Color((int)(Math.random() * 0x1000000)));
+                
                 ///////////////////////////////////////////
                 btnuevo1.setToolTipText(Integer.toString(c1) + "," + Integer.toString(c2));
                 botones[c1][c2] = btnuevo1;
