@@ -5,36 +5,31 @@ import java.util.zip.DataFormatException;
 import java.io.*;
 import java.util.ArrayList;
 
-public class simpleServer 	{
+public class simpleServer{
 	
 	  public static void main(String args[]) throws IOException 
 	  {
 	    // Registrar el servicio en el puerto 1234
 	    ServerSocket s = new ServerSocket(1234);
-	    
+        boolean banderaOtro = true;
+
 	    //Espera y acepta conexiones
-	    while(true){
+	    //while(true){
 	          Socket s1 = s.accept();
 		    //Obtiene un flujo de comunicación asociado con el socket
-		    
 	        OutputStream s1out = s1.getOutputStream();
 	        DataOutputStream dos = new DataOutputStream (s1out);
 
 	        InputStream s1In = s1.getInputStream();
 	        DataInputStream dis = new DataInputStream(s1In);
 	          
-	        dos.writeUTF("Conexión con el servidor Establecida\n");
-		    
-		    //Scanner sc = new Scanner(System.in);
-	        boolean banderaOtro = true;
 
-		    //Envia un mensaje
-		    dos.writeUTF("Introduzca un número entero para el tamaño de la matriz\n");
+		    Scanner sc = new Scanner(System.in);
 	        
 	        while(banderaOtro == true) 
 	        {
+		        dos.writeUTF("Conexión con el servidor establecida\nIntroduzca un número entero para el tamaño de la matriz");
 			    int tamanioMat = (dis.readInt());
-			    
 			    try 
 			    {
 		        	if(tamanioMat != (int)tamanioMat)
@@ -71,22 +66,25 @@ public class simpleServer 	{
 				        ObjectOutputStream op = new ObjectOutputStream(s1out);
 				        op.writeObject(lista);
 				        
-					    dos.writeUTF("Desea crear otra matriz? S/N\n");
-				        if(dis.readUTF() != "S") 
+				        
+				        
+					    dos.writeUTF("Desea crear otra matriz? SI/NO ");
+					    String resp = dis.readUTF();
+					    System.out.println(resp);
+					    
+				        if(!(resp.equals("SI"))) 
 				        {
 				        	banderaOtro = false;
+					        dos.writeUTF("Sesión Finalizada. Hasta luego!");
 				        }
 			        }
 		        }catch(DataFormatException exception) 
 			    {
 			        dos.writeUTF("El dato proporcionado no es de tipo entero.\n Introduzca otro dato");
 		        }
-			    
-			    
 	        }
 	        
-	        dos.writeUTF("Sesión Finalizada. Hasta luego!");
-		    //sc.close();
+		    sc.close();
 		    
 	        //Cierra la conexión, pero no el socket del servidor
 		    dis.close();
@@ -94,6 +92,6 @@ public class simpleServer 	{
 		    dos.close();
 		    s1out.close();         
 		    s1.close();
-		  }
+		  //}
       	}
       }
