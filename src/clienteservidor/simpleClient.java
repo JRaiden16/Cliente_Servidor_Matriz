@@ -2,15 +2,11 @@ package clienteservidor;
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class simpleClient{
-	public static int entero = 0;
-	public static float flotante = 0;
-	public static boolean boleano = false;
-	public static boolean bandera = true;
-	public static String cadena = "";
 	
-	  public static void main(String args[]) throws IOException 
+	  public static void main(String args[]) throws IOException, ClassNotFoundException 
 	  {
 	    //Abrir una conexión al server en el puerto 1234
 	    Socket s1 = new Socket("localhost",1234);
@@ -25,25 +21,18 @@ public class simpleClient{
 	    Scanner sc = new Scanner(System.in);
 
 	    String st = new String (dis.readUTF());
+	    
 	    System.out.println(st);
 	    
-	    entero = sc.nextInt();
-	    dos.writeInt(entero);
-	    
-	    do{
-	    	st = new String (dis.readUTF());
-		    System.out.println(st);
-		    if(st == "Por favor envie un dato entero"){
-			    entero = sc.nextInt();
-			    dos.writeInt(entero);
-		    }else if(st == "Por favor envie un dato flotante") {
-			    float flotante = sc.nextFloat();
-			    dos.writeFloat(flotante);
-		    }else {
-			    bandera = false;
-		    }
-	    }while(bandera == true);
-	    
+        int tamanioMat = sc.nextInt();
+        sc.nextLine();
+        dos.writeInt(tamanioMat);
+        
+        ObjectInputStream inp = new ObjectInputStream(s1In);
+        ArrayList lista = (ArrayList) inp.readObject();
+        //ip.readObject(lista);
+		    
+        
 	    sc.close();
 	    
 	    //Cerrar la conexion
